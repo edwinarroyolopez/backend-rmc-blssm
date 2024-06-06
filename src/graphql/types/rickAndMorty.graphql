@@ -1,0 +1,29 @@
+type Query {
+    character(id: Int!): Character
+    characters(page: Int): [Character]
+  }
+
+  type Character {
+    id: Int
+    name: String
+    status: String
+    species: String
+    type: String
+    gender: String
+    origin: Origin
+    location: Location
+    image: String
+    episode: [String]
+    url: String
+    created: String
+  }
+
+  type Origin {
+    name: String
+    url: String
+  }
+
+  type Location {
+    name: String
+    url: String
+  }
