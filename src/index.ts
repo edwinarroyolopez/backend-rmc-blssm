@@ -28,6 +28,7 @@ async function startServer() {
 // server.start();
 
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
+console.log(swaggerSpec)
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 

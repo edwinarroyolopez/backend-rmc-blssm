@@ -10,15 +10,13 @@ const swaggerOptions = {
     },
     servers: [
       {
-        url: 'http://localhost:4000/',
+        url: 'http://localhost:3000/',
         description: 'Servidor de desarrollo',
       },
     ],
   },
-  apis: [
-    path.resolve(__dirname, './graphql/types/*.ts'),
-    path.resolve(__dirname, './graphql/resolvers/*.ts')
-  ],
+  basePath: '/',
+  apis: ['./src/graphql/resolvers/rickAndMortyResolver.ts'],
 };
 
 export default swaggerOptions;
