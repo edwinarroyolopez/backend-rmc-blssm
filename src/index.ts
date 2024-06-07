@@ -1,12 +1,16 @@
 import { ApolloServer } from 'apollo-server-express';
+
 import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import NodeCache from 'node-cache';
 
+
+
 import typeDefs  from './graphql/types';
 import resolvers from './graphql/resolvers';
 
+import { loggingMiddleware } from './middleware/loggingMiddleware';
 import swaggerOptions from '../swaggerOptions';
 
 const app:any = express();
@@ -16,6 +20,7 @@ const PORT = process.env.PORT || 3000;
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  plugins: [loggingMiddleware],
   context: () => ({ cache }),
 });
 
