@@ -1,65 +1,115 @@
 import { getCharacterById, getCharacters } from '../../services/rickAndMortyService';
 
+
 /**
  * @swagger
- * /character/{id}:
- *   get:
- *     summary: Get a character by ID
- *     description: Fetch a single character by their ID from the Rick and Morty API.
- *     parameters:
- *       - in: path
- *         name: id
+ * openapi: 3.0.0
+ * paths:
+ *   /graphql:
+ *     post:
+ *       summary: Ejecutar consultas y mutaciones de GraphQL
+ *       requestBody:
  *         required: true
- *         schema:
- *           type: integer
- *         description: The ID of the character
- *     responses:
- *       200:
- *         description: A single character
  *         content:
  *           application/json:
  *             schema:
  *               type: object
  *               properties:
- *                 id:
- *                   type: integer
- *                 name:
+ *                 query:
  *                   type: string
- *                 status:
- *                   type: string
- *                 species:
- *                   type: string
- *                 type:
- *                   type: string
- *                 gender:
- *                   type: string
- *                 origin:
+ *                   example: |
+ *                     query {
+ *                       character(id: 1) {
+ *                         id
+ *                         name
+ *                         status
+ *                         species
+ *                         type
+ *                         gender
+ *                         origin {
+ *                           name
+ *                           url
+ *                         }
+ *                         location {
+ *                           name
+ *                           url
+ *                         }
+ *                         image
+ *                         episode
+ *                         url
+ *                         created
+ *                       }
+ *                     }
+ *                 variables:
  *                   type: object
- *                   properties:
- *                     name:
- *                       type: string
- *                     url:
- *                       type: string
- *                 location:
- *                   type: object
- *                   properties:
- *                     name:
- *                       type: string
- *                     url:
- *                       type: string
- *                 image:
- *                   type: string
- *                 episode:
- *                   type: array
- *                   items:
- *                     type: string
- *                 url:
- *                   type: string
- *                 created:
- *                   type: string
- *       404:
- *         description: Character not found
+ *               required:
+ *                 - query
+ *       responses:
+ *         '200':
+ *           description: Respuesta exitosa
+ *           content:
+ *             application/json:
+ *               schema:
+ *                 type: object
+ *                 properties:
+ *                   data:
+ *                     type: object
+ *                     properties:
+ *                       character:
+ *                         type: object
+ *                         properties:
+ *                           id:
+ *                             type: integer
+ *                           name:
+ *                             type: string
+ *                           status:
+ *                             type: string
+ *                           species:
+ *                             type: string
+ *                           type:
+ *                             type: string
+ *                           gender:
+ *                             type: string
+ *                           origin:
+ *                             type: object
+ *                             properties:
+ *                               name:
+ *                                 type: string
+ *                               url:
+ *                                 type: string
+ *                           location:
+ *                             type: object
+ *                             properties:
+ *                               name:
+ *                                 type: string
+ *                               url:
+ *                                 type: string
+ *                           image:
+ *                             type: string
+ *                           episode:
+ *                             type: array
+ *                             items:
+ *                               type: string
+ *                           url:
+ *                             type: string
+ *                           created:
+ *                             type: string
+ *         '400':
+ *           description: Error de solicitud
+ *         '500':
+ *           description: Error del servidor
+ *         '404':
+ *           description: Character not found
  */
+
+
+/*
+  {
+    "query": "query {\n  character(id: 1) {\n    id\n    name\n    status\n  }\n}\n",
+    "variables": {}
+  }
+
+*/
 const character = async (_: any, { id }: { id: number }, { cache }: any) => {
   console.log('-- test --')
   const cacheKey = `character_${id}`;
@@ -71,81 +121,6 @@ const character = async (_: any, { id }: { id: number }, { cache }: any) => {
   return character;
 };
 
-/**
- * @swagger
- * /characters:
- *   get:
- *     summary: Get a list of characters
- *     description: Fetch a paginated list of characters from the Rick and Morty API.
- *     parameters:
- *       - in: query
- *         name: page
- *         schema:
- *           type: integer
- *         description: The page number to fetch
- *     responses:
- *       200:
- *         description: A list of characters
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 info:
- *                   type: object
- *                   properties:
- *                     count:
- *                       type: integer
- *                     pages:
- *                       type: integer
- *                     next:
- *                       type: string
- *                     prev:
- *                       type: string
- *                 results:
- *                   type: array
- *                   items:
- *                     type: object
- *                     properties:
- *                       id:
- *                         type: integer
- *                       name:
- *                         type: string
- *                       status:
- *                         type: string
- *                       species:
- *                         type: string
- *                       type:
- *                         type: string
- *                       gender:
- *                         type: string
- *                       origin:
- *                         type: object
- *                         properties:
- *                           name:
- *                             type: string
- *                           url:
- *                             type: string
- *                       location:
- *                         type: object
- *                         properties:
- *                           name:
- *                             type: string
- *                           url:
- *                             type: string
- *                       image:
- *                         type: string
- *                       episode:
- *                         type: array
- *                         items:
- *                           type: string
- *                       url:
- *                         type: string
- *                       created:
- *                         type: string
- *       404:
- *         description: Page not found
- */
 const characters = async (_: any, { page }: { page?: number }, { cache }: any) => {
   const cacheKey = `characters_${page || 1}`;
     if (cache.has(cacheKey)) {

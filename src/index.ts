@@ -4,11 +4,6 @@ import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import NodeCache from 'node-cache';
 
-
-import yaml from 'yaml';
-import fs from 'fs';
-import path from 'path';
-
 import typeDefs  from './graphql/types';
 import resolvers from './graphql/resolvers';
 
@@ -28,16 +23,12 @@ async function startServer() {
   await server.start();
   server.applyMiddleware({ app });
   console.log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`);
+  console.log(`📚 Docs ready at http://localhost:${PORT}/api-docs`);
 }
 
-// server.start();
-
-// const swaggerSpec = swaggerJsdoc(swaggerOptions);
-// console.log(swaggerSpec)
-// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
-const swaggerDocument = yaml.parse(fs.readFileSync(path.join(__dirname, 'swagger.yaml'), 'utf8'));
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+const swaggerSpec = swaggerJsdoc(swaggerOptions);
+console.log(swaggerSpec)
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 startServer().then(() => {
   
