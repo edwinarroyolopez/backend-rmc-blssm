@@ -55,10 +55,20 @@ stored in a relational database.
 
 2. Create query that allows filtering of characters by:
     ○ Status
+        ```query ExampleQuery($characterId: Int!) {
+            character(id: $characterId) {
+                name
+                image
+            }
+        }```
+
     ○ Species
     ○ Gender
     ○ Name
     ○ Origin
+
+
+
 3. Connect the API to a relational database, using the ORM sequelize (see link at the end of the presentation) and the database setup has to be done by migrations (e.g. MySQL or PostgreSQL) to store the character information.
 4.  Implement connection to Redis to cache search results and improve performance.
 5. Do an initial relational database population with 15 of the Rick and Morty api characters.

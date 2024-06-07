@@ -1,5 +1,5 @@
 import { getCharacterById, getCharacters } from '../../services/rickAndMortyService';
-
+import { timingDecorator } from '../../tools/timingDecorator';
 
 /**
  * @swagger
@@ -110,8 +110,11 @@ import { getCharacterById, getCharacters } from '../../services/rickAndMortyServ
   }
 
 */
-const character = async (_: any, { id }: { id: number }, { cache }: any) => {
-  console.log('-- test --')
+const character = timingDecorator(async (_: any, params: { id: number }, { cache }: any) => {
+  const { id } = params;
+  console.log('-- test --');
+  console.log({ params });
+
   const cacheKey = `character_${id}`;
   if (cache.has(cacheKey)) {
     return cache.get(cacheKey);
@@ -119,17 +122,18 @@ const character = async (_: any, { id }: { id: number }, { cache }: any) => {
   const character = await getCharacterById(id);
   cache.set(cacheKey, character);
   return character;
-};
+}, 'character');
 
-const characters = async (_: any, { page }: { page?: number }, { cache }: any) => {
-  const cacheKey = `characters_${page || 1}`;
-    if (cache.has(cacheKey)) {
-      return cache.get(cacheKey);
-    }
-    const characters = await getCharacters(page);
-    cache.set(cacheKey, characters);
-    return characters;
-};
+const characters = timingDecorator(async (_: any, { page, status, gender, name, origin }: { page?: number, status?: string, gender?: string, name?: string, origin?: string }, { cache }: any) => {
+  const filters = { status, gender, name, origin };
+  const cacheKey = `characters_${page || 1}_${JSON.stringify(filters)}`;
+  if (cache.has(cacheKey)) {
+    return cache.get(cacheKey);
+  }
+  const characters = await getCharacters(page, filters);
+  cache.set(cacheKey, characters);
+  return characters;
+},'characters');
 
 export const Query = {
   character,
