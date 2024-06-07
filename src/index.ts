@@ -4,6 +4,11 @@ import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
 import NodeCache from 'node-cache';
 
+
+import yaml from 'yaml';
+import fs from 'fs';
+import path from 'path';
+
 import typeDefs  from './graphql/types';
 import resolvers from './graphql/resolvers';
 
@@ -27,10 +32,12 @@ async function startServer() {
 
 // server.start();
 
-const swaggerSpec = swaggerJsdoc(swaggerOptions);
-console.log(swaggerSpec)
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+// const swaggerSpec = swaggerJsdoc(swaggerOptions);
+// console.log(swaggerSpec)
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
+const swaggerDocument = yaml.parse(fs.readFileSync(path.join(__dirname, 'swagger.yaml'), 'utf8'));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 startServer().then(() => {
   

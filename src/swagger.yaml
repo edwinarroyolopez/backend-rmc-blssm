@@ -1,0 +1,103 @@
+openapi: 3.0.0
+info:
+  title: Rick and Morty API
+  description: API para obtener información de los personajes de Rick and Morty usando GraphQL
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/
+    description: Servidor local
+
+paths:
+  /graphql:
+    post:
+      summary: Ejecutar consultas y mutaciones de GraphQL
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                query:
+                  type: string
+                  example: |
+                    query {
+                      character(id: 1) {
+                        id
+                        name
+                        status
+                        species
+                        type
+                        gender
+                        origin {
+                          name
+                          url
+                        }
+                        location {
+                          name
+                          url
+                        }
+                        image
+                        episode
+                        url
+                        created
+                      }
+                    }
+                variables:
+                  type: object
+              required:
+                - query
+      responses:
+        '200':
+          description: Respuesta exitosa
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      character:
+                        type: object
+                        properties:
+                          id:
+                            type: integer
+                          name:
+                            type: string
+                          status:
+                            type: string
+                          species:
+                            type: string
+                          type:
+                            type: string
+                          gender:
+                            type: string
+                          origin:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              url:
+                                type: string
+                          location:
+                            type: object
+                            properties:
+                              name:
+                                type: string
+                              url:
+                                type: string
+                          image:
+                            type: string
+                          episode:
+                            type: array
+                            items:
+                              type: string
+                          url:
+                            type: string
+                          created:
+                            type: string
+        '400':
+          description: Error de solicitud
+        '500':
+          description: Error del servidor
