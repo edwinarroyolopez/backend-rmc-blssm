@@ -128,8 +128,6 @@ Enter this link [Studio Apollo Graphql](http://localhost:3000/graphql), press *Q
 
 
 
-
-
 ## Description
 
 The candidate must develop an API that allows performing searches for Rick
@@ -163,7 +161,25 @@ stored in a relational database.
 ## Deliverables
 
 1. ✅ Project source code in a Git repository (can be GitHub).
-2. ERD diagram of the database
+2. ✅ ERD diagram of the database
+ ```
+┌──────────────────────────────┐
+│          Character           │
+├──────────────────────────────┤
+│ id        : INTEGER (PK)     │
+│ name      : STRING           │
+│ status    : STRING           │
+│ species   : STRING           │
+│ type      : STRING           │
+│ gender    : STRING           │
+│ origin    : JSONB            │
+│ location  : JSONB            │
+│ image     : STRING           │
+│ episode   : ARRAY(STRING)    │
+│ url       : STRING           │
+│ created   : STRING           │
+└──────────────────────────────┘
+ ```
 3. ✅ (Optional) Swagger documentation for api consumption.
 4. ✅ Documentation explaining how to run the application and how to use the API (can be a README file in the repository or a Wiki in the same repository).
 
