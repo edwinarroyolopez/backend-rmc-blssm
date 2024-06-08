@@ -4,7 +4,7 @@ import { getCharacterById, getCharacters, getAllCharactersFromAPI } from '../ser
 jest.mock('axios');
 const mockedAxios = axios as jest.Mocked<typeof axios>;
 
-describe('charactersService', () => {
+describe('characterServices', () => {
   describe('getCharacterById', () => {
     it('should fetch a character by ID', async () => {
       const characterData = { id: 1, name: 'Rick Sanchez' };
@@ -31,6 +31,14 @@ describe('charactersService', () => {
         }
       });
       expect(result).toEqual(charactersData);
+    });
+
+    it('should return an empty array on error', async () => {
+      mockedAxios.get.mockRejectedValue(new Error('Network Error'));
+
+      const result = await getCharacters();
+
+      expect(result).toEqual([]);
     });
   });
 
