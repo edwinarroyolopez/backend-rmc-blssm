@@ -162,7 +162,7 @@ stored in a relational database.
 6. ✅ Make a middleware that prints by console the information that you consider relevant for each request.
 7. ✅ (Optional) Make a cron job that runs every 12 hours and updates the database characters if there is any change in that character.
 8. ✅ (Optional) Implement a method decorator that prints via console the time it takes to execute the query.
-9. (Optional) Implement unit tests to the character search query.
+9. ✅ (Optional) Implement unit tests to the character search query.
 10. ✅ (Optional) Use TypeScript for the development of the project.
 11. ✅ (Optional) Apply software design patterns.
 
