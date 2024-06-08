@@ -34,8 +34,6 @@ To install run this command ```npm install```
 ## Migrations
 Usa Sequelize CLI para crear una migración y un archivo de semilla.
 
-```sequelize migration:create --name create-character-table```
-```sequelize seed:create --name initial-characters```
 
 ```sequelize db:migrate```
 ```sequelize db:seed:all```
