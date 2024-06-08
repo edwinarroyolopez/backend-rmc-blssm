@@ -19,30 +19,11 @@ import { timingDecorator } from '../../tools/timingDecorator';
  *                 query:
  *                   type: string
  *                   example: |
- *                     query {
- *                       character(id: 1) {
- *                         id
- *                         name
- *                         status
- *                         species
- *                         type
- *                         gender
- *                         origin {
- *                           name
- *                           url
- *                         }
- *                         location {
- *                           name
- *                           url
- *                         }
- *                         image
- *                         episode
- *                         url
- *                         created
- *                       }
- *                     }
+ *                     query Characters($species: String) {  characters(species: $species) { id name status gender species origin {name} } } 
  *                 variables:
  *                   type: object
+ *                   example: |
+ *                     {"species":"human"}
  *               required:
  *                 - query
  *       responses:

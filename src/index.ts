@@ -1,5 +1,4 @@
 import { ApolloServer } from 'apollo-server-express';
-
 import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
@@ -9,7 +8,6 @@ import redis from './config/redisClient';
 
 import sequelize from './config/database';
 
-
 import typeDefs  from './graphql/types';
 import resolvers from './graphql/resolvers';
 
@@ -17,7 +15,6 @@ import { loggingMiddleware } from './middleware/loggingMiddleware';
 import swaggerOptions from './swaggerOptions';
 
 dotenv.config();
-
 
 const app:any = express();
 const PORT = process.env.PORT || 3000;

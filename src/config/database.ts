@@ -10,7 +10,7 @@ const sequelize = new Sequelize({
   username: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   dialect: 'postgres',
-  logging: false, // Puedes habilitar el logging si lo necesitas
+  logging: false
 });
 
 export default sequelize;
