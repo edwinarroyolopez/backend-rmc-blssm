@@ -6,6 +6,7 @@
 2. [Migrations](#migrations)
 3. [Start](#start)
 4. [Test](#test)
+5. [UseApi](#useapi)
 
 
 ## Folder structure
@@ -71,7 +72,9 @@ To open coverage file that content `open coverage/lcov-report/index.html`
 **Coverage Status:** *97.46% covered* 
 
 
-## Use Api - Swagger API
+## UseApi 
+
+### Swagger API
 
 Enter this link [Api Docs Swagger](http://localhost:3000/api-docs/)
 - Queries Swagger - Filter by:
@@ -124,7 +127,6 @@ Enter this link [Api Docs Swagger](http://localhost:3000/api-docs/)
 ## Use Api - Studio Apollo Graphql
 
 Enter this link [Studio Apollo Graphql](http://localhost:3000/graphql), press *Query your server* 
-
 
 
 
