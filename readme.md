@@ -51,16 +51,26 @@ search results to improve performance. The characters must also be able to be
 stored in a relational database.
 
 ## Requirements
-1. 🔲 Create an API using Express and GraphQL that allows searching for Rick and Morty characters.
+1. ✅ Create an API using Express and GraphQL that allows searching for Rick and Morty characters.
 
-2. 🔲 Create query that allows filtering of characters by:
+2. ✅ Create query that allows filtering of characters by:
     ○ Status
-        ```query ExampleQuery($characterId: Int!) {
-            character(id: $characterId) {
+        ```
+        query Characters($gender: String) {
+            characters(gender: $gender) {
                 name
-                image
+                status
+                gender
+                origin {
+                name
+                }
             }
-        }```
+        }
+
+        {
+           "gender": "female"
+        }
+        ```
 
     ○ Species
     ○ Gender
@@ -68,9 +78,9 @@ stored in a relational database.
     ○ Origin
 
 
-3. Connect the API to a relational database, using the ORM sequelize (see link at the end of the presentation) and the database setup has to be done by migrations (e.g. MySQL or PostgreSQL) to store the character information.
-4.  Implement connection to Redis to cache search results and improve performance.
-5. Do an initial relational database population with 15 of the Rick and Morty api characters.
+3. 🔲 Connect the API to a relational database, using the ORM sequelize (see link at the end of the presentation) and the database setup has to be done by migrations (e.g. MySQL or PostgreSQL) to store the character information.
+4. ✅ Implement connection to Redis to cache search results and improve performance.
+5. 🔲 Do an initial relational database population with 15 of the Rick and Morty api characters.
 6. ✅ Make a middleware that prints by console the information that you consider relevant for each request.
 
 7. 🔲 (Optional) Make a cron job that runs every 12 hours and updates the database characters if there is any change in that character.
@@ -85,7 +95,7 @@ stored in a relational database.
 
 1. ✅ Project source code in a Git repository (can be GitHub).
 2. ERD diagram of the database
-3. 🔲 (Optional) Swagger documentation for api consumption.
+3. ✅ (Optional) Swagger documentation for api consumption.
 4. 🔲 Documentation explaining how to run the application and how to use the API (can be a README file in the repository or a Wiki in the same repository).
 
 

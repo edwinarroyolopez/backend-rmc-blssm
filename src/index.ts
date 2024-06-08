@@ -3,7 +3,9 @@ import { ApolloServer } from 'apollo-server-express';
 import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
-import NodeCache from 'node-cache';
+import dotenv from 'dotenv';
+
+import redis from './config/redisClient';
 
 
 
@@ -13,15 +15,22 @@ import resolvers from './graphql/resolvers';
 import { loggingMiddleware } from './middleware/loggingMiddleware';
 import swaggerOptions from '../swaggerOptions';
 
+dotenv.config();
+
+
 const app:any = express();
-const cache = new NodeCache({ stdTTL: 100 });
 const PORT = process.env.PORT || 3000;
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
   plugins: [loggingMiddleware],
-  context: () => ({ cache }),
+  context: ({ req }) => {
+    return {
+      headers: req.headers,
+      redis
+    };
+  }
 });
 
 async function startServer() {

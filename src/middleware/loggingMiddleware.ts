@@ -17,7 +17,7 @@ export const loggingMiddleware: ApolloServerPlugin = {
       async willSendResponse(context) {
         const operationName: string  = context.operationName || '';
         if(OPERATIONS_ALLOWED_LOG.includes(operationName)){
-          console.log('Response:', context.response.data);
+          // console.log('Response:', context.response.data);
         }
       }
     };

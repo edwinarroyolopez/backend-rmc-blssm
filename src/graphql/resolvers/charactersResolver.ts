@@ -110,28 +110,30 @@ import { timingDecorator } from '../../tools/timingDecorator';
   }
 
 */
-const character = timingDecorator(async (_: any, params: { id: number }, { cache }: any) => {
+const character = timingDecorator(async (_: any, params: { id: number }, { redis }: any) => {
   const { id } = params;
-  console.log('-- test --');
-  console.log({ params });
-
   const cacheKey = `character_${id}`;
-  if (cache.has(cacheKey)) {
-    return cache.get(cacheKey);
+  const cachedCharacter = await redis.get(cacheKey);
+
+  if (cachedCharacter) {
+    return JSON.parse(cachedCharacter);
   }
+  
   const character = await getCharacterById(id);
-  cache.set(cacheKey, character);
+  await redis.set(cacheKey, JSON.stringify(character), 'EX', 3600); // 1 hour expiration
   return character;
 }, 'character');
 
-const characters = timingDecorator(async (_: any, { page, status, gender, name, origin }: { page?: number, status?: string, gender?: string, name?: string, origin?: string }, { cache }: any) => {
+const characters = timingDecorator(async (_: any, { page, status, gender, name, origin }: { page?: number, status?: string, gender?: string, name?: string, origin?: string }, { redis }: any) => {
   const filters = { status, gender, name, origin };
   const cacheKey = `characters_${page || 1}_${JSON.stringify(filters)}`;
-  if (cache.has(cacheKey)) {
-    return cache.get(cacheKey);
+  const cachedCharacter = await redis.get(cacheKey);
+  
+  if (cachedCharacter) {
+    return JSON.parse(cachedCharacter);
   }
   const characters = await getCharacters(page, filters);
-  cache.set(cacheKey, characters);
+  await redis.set(cacheKey, JSON.stringify(character), 'EX', 3600); // 1 hour expiration
   return characters;
 },'characters');
 
