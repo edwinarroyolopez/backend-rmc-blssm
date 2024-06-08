@@ -4,8 +4,8 @@
 
 1. [Install](#install)
 2. [Migrations](#migrations)
-2. [Start](#start)
-3. [Test](#test)
+3. [Start](#start)
+4. [Test](#test)
 
 
 ## Folder structure
@@ -14,14 +14,14 @@ src/
 │
 ├── graphql/
 │   ├── resolvers/
-│   │   ├── rickAndMortyResolver.ts
+│   │   ├── charactersResolver.ts
 │   │   └── index.ts
 │   ├── types/
 │   │   ├── index.ts
-│   │   └── rickAndMorty.ts
+│   │   └── characters.ts
 │
 ├── services/
-│   └── rickAndMortyService.ts
+│   └── charactersService.ts
 ├── packages.json
 └── readme.md
 ```
@@ -32,12 +32,10 @@ src/
 To install run this command ```npm install```
 
 ## Migrations
-Usa Sequelize CLI para crear una migración y un archivo de semilla.
 
+To generate migrations run this command ```sequelize db:migrate```
 
-```sequelize db:migrate```
-```sequelize db:seed:all```
-
+To insert seeds run this command  ```sequelize db:seed:all```
 
 ## Start 
 
@@ -46,6 +44,7 @@ To start run this command ```npm start```
 ## Test 
 
 To run test use this command `npm test`
+
 To run coverage test use this command `npm run test:coverage`
 
 To open coverage file that content `open coverage/lcov-report/index.html`
@@ -64,7 +63,7 @@ stored in a relational database.
 1. ✅ Create an API using Express and GraphQL that allows searching for Rick and Morty characters.
 
 2. ✅ Create query that allows filtering of characters by:
-    ○ Status
+    - Status
         ```
         query Characters($gender: String) {
             characters(gender: $gender) {
@@ -82,19 +81,17 @@ stored in a relational database.
         }
         ```
 
-    ○ Species
-    ○ Gender
-    ○ Name
-    ○ Origin
+    - Species
+    - Gender
+    - Name
+    - Origin
 
 
 3. ✅ Connect the API to a relational database, using the ORM sequelize (see link at the end of the presentation) and the database setup has to be done by migrations (e.g. MySQL or PostgreSQL) to store the character information.
 4. ✅ Implement connection to Redis to cache search results and improve performance.
-5. 🔲 Do an initial relational database population with 15 of the Rick and Morty api characters.
+5. ✅ Do an initial relational database population with 15 of the Rick and Morty api characters.
 6. ✅ Make a middleware that prints by console the information that you consider relevant for each request.
-
-7. 🔲 (Optional) Make a cron job that runs every 12 hours and updates the database characters if there is any change in that character.
-
+7. ✅ (Optional) Make a cron job that runs every 12 hours and updates the database characters if there is any change in that character.
 8. ✅ (Optional) Implement a method decorator that prints via console the time it takes to execute the query.
 9. (Optional) Implement unit tests to the character search query.
 10. ✅ (Optional) Use TypeScript for the development of the project.

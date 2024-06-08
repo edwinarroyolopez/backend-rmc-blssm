@@ -16,6 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "@graphql-tools/load-files": "^7.0.0",
+    "@types/node-cron": "^3.0.11",
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.6",
     "apollo-server": "^3.13.0",
@@ -28,6 +29,7 @@
     "graphql-tools": "^9.0.1",
     "ioredis": "^5.4.1",
     "node-cache": "^5.1.2",
+    "node-cron": "^3.0.3",
     "pg": "^8.12.0",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.37.3",

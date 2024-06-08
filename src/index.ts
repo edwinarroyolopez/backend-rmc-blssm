@@ -42,7 +42,6 @@ async function startServer() {
 }
 
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
-console.log(swaggerSpec)
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Synchronize models
@@ -57,3 +56,6 @@ startServer().then(() => {
     console.log(`Server running on port ${PORT}`);
   });
 });
+
+// to execute cron job
+import './tools/cronJob';
