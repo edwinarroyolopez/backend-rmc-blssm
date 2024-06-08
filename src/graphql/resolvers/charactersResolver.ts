@@ -1,4 +1,5 @@
-import { getCharacterById, getCharacters } from '../../services/rickAndMortyService';
+import { getCharacterById, getCharacters } from '../../services/charactersService';
+import Character from '../../models/Character';
 import { timingDecorator } from '../../tools/timingDecorator';
 
 /**
@@ -119,9 +120,13 @@ const character = timingDecorator(async (_: any, params: { id: number }, { redis
     return JSON.parse(cachedCharacter);
   }
   
-  const character = await getCharacterById(id);
-  await redis.set(cacheKey, JSON.stringify(character), 'EX', 3600); // 1 hour expiration
-  return character;
+  const characterData = await getCharacterById(id);
+  await redis.set(cacheKey, JSON.stringify(characterData), 'EX', 3600); // 1 hour expiration
+
+  // Save the character into db
+  await Character.upsert(characterData);
+
+  return characterData;
 }, 'character');
 
 const characters = timingDecorator(async (_: any, { page, status, gender, name, origin }: { page?: number, status?: string, gender?: string, name?: string, origin?: string }, { redis }: any) => {
@@ -132,9 +137,14 @@ const characters = timingDecorator(async (_: any, { page, status, gender, name, 
   if (cachedCharacter) {
     return JSON.parse(cachedCharacter);
   }
-  const characters = await getCharacters(page, filters);
-  await redis.set(cacheKey, JSON.stringify(character), 'EX', 3600); // 1 hour expiration
-  return characters;
+
+  const charactersData = await getCharacters(page, filters);
+  await redis.set(cacheKey, JSON.stringify(charactersData), 'EX', 3600); // 1 hour expiration
+
+   // Save the characters into db
+  await Character.bulkCreate(charactersData, { updateOnDuplicate: ['id'] }); 
+
+  return charactersData;
 },'characters');
 
 export const Query = {

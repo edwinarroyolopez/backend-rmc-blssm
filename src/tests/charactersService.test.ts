@@ -1,6 +1,6 @@
 import  {
     getCharacters
-}  from '../services/rickAndMortyService';
+}  from '../services/charactersService';
 
 describe('RickAndMortyService', () => {
   it('should return a list of characters', async () => {

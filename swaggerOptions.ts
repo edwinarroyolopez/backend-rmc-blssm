@@ -16,7 +16,7 @@ const swaggerOptions = {
     ],
   },
   basePath: '/',
-  apis: ['./src/graphql/resolvers/rickAndMortyResolver.ts'],
+  apis: ['./src/graphql/resolvers/*.ts'],
 };
 
 export default swaggerOptions;

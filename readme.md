@@ -3,6 +3,7 @@
 ## Contents
 
 1. [Install](#install)
+2. [Migrations](#migrations)
 2. [Start](#start)
 3. [Test](#test)
 
@@ -30,6 +31,16 @@ src/
 
 To install run this command ```npm install```
 
+## Migrations
+Usa Sequelize CLI para crear una migración y un archivo de semilla.
+
+```sequelize migration:create --name create-character-table```
+```sequelize seed:create --name initial-characters```
+
+```sequelize db:migrate```
+```sequelize db:seed:all```
+
+
 ## Start 
 
 To start run this command ```npm start```
@@ -40,6 +51,7 @@ To run test use this command `npm test`
 To run coverage test use this command `npm run test:coverage`
 
 To open coverage file that content `open coverage/lcov-report/index.html`
+
 
 
 ## Description
@@ -78,7 +90,7 @@ stored in a relational database.
     ○ Origin
 
 
-3. 🔲 Connect the API to a relational database, using the ORM sequelize (see link at the end of the presentation) and the database setup has to be done by migrations (e.g. MySQL or PostgreSQL) to store the character information.
+3. ✅ Connect the API to a relational database, using the ORM sequelize (see link at the end of the presentation) and the database setup has to be done by migrations (e.g. MySQL or PostgreSQL) to store the character information.
 4. ✅ Implement connection to Redis to cache search results and improve performance.
 5. 🔲 Do an initial relational database population with 15 of the Rick and Morty api characters.
 6. ✅ Make a middleware that prints by console the information that you consider relevant for each request.

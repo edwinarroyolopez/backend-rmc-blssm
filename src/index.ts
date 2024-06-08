@@ -7,6 +7,7 @@ import dotenv from 'dotenv';
 
 import redis from './config/redisClient';
 
+import sequelize from './config/database';
 
 
 import typeDefs  from './graphql/types';
@@ -44,8 +45,14 @@ const swaggerSpec = swaggerJsdoc(swaggerOptions);
 console.log(swaggerSpec)
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
+// Synchronize models
+sequelize.sync().then(() => {
+  console.log('Synchronized database');
+}).catch((err: Error) => {
+  console.error('Database synchronization error:', err);
+});
+
 startServer().then(() => {
-  
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
   });
