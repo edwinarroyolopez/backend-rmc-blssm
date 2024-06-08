@@ -1,6 +1,6 @@
 type Query {
     character(id: Int!): Character
-    characters(page: Int, status: String, gender: String, name: String, origin: String): [Character]
+    characters(page: Int, status: String, gender: String, name: String, origin: String species: String): [Character]
   }
 
   type Character {

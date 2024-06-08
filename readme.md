@@ -47,7 +47,7 @@ backend-rmc-blssm/
 
 
 ## Install
-
+**Node Version:** *v18.18.2* 
 To install run this command ```npm install```
 
 ## Migrations
@@ -68,6 +68,66 @@ To run coverage test use this command `npm run test:coverage`
 
 To open coverage file that content `open coverage/lcov-report/index.html`
 
+**Coverage Status:** *97.46% covered* 
+
+
+## Use Api - Swagger API
+
+Enter this link [Api Docs Swagger](http://localhost:3000/api-docs/)
+- Queries Swagger - Filter by:
+    - Status
+
+        ```    
+        {
+            "query": "query Characters($status: String) {  characters(status: $status) {    id    name    status gender species origin {name} } }",
+            "variables": {"status":"alive"}
+        }
+        ```
+
+
+    - Species
+
+        ```    
+        {
+            "query": "query Characters($species: String) {  characters(species: $species) {    id    name    status gender species origin {name} } }",
+            "variables": {"species":"human"}
+        }
+        ```
+
+    - Gender
+        ```    
+        {
+            "query": "query Characters($gender: String) {  characters(gender: $gender) { id    name  status gender species origin {name} } }",
+            "variables": {"gender":"male"}
+        }
+        ``` 
+
+
+    - Name
+        ```    
+        {
+            "query": "query Characters($name: String) {  characters(name: $name) { id    name  status gender species origin {name} } }",
+            "variables": {"name":"Aqua Rick"}
+        }
+        ```
+
+    - Origin
+        ```    
+        {
+            "query": "query Characters($originName: String) {  characters(origin: $originName) { id    name  status gender species origin {name} } }",
+            "variables": {"originName":"Earth"}
+        }
+        ```
+
+
+
+## Use Api - Studio Apollo Graphql
+
+Enter this link [Studio Apollo Graphql](http://localhost:3000/graphql), press *Query your server* 
+
+
+
+
 
 
 ## Description
@@ -83,23 +143,6 @@ stored in a relational database.
 
 2. ✅ Create query that allows filtering of characters by:
     - Status
-        ```
-        query Characters($gender: String) {
-            characters(gender: $gender) {
-                name
-                status
-                gender
-                origin {
-                name
-                }
-            }
-        }
-
-        {
-           "gender": "female"
-        }
-        ```
-
     - Species
     - Gender
     - Name
@@ -122,7 +165,7 @@ stored in a relational database.
 1. ✅ Project source code in a Git repository (can be GitHub).
 2. ERD diagram of the database
 3. ✅ (Optional) Swagger documentation for api consumption.
-4. 🔲 Documentation explaining how to run the application and how to use the API (can be a README file in the repository or a Wiki in the same repository).
+4. ✅ Documentation explaining how to run the application and how to use the API (can be a README file in the repository or a Wiki in the same repository).
 
 
 ## Evaluation criteria 
