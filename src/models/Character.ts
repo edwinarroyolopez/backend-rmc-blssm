@@ -1,15 +1,17 @@
 import { DataTypes, Model } from 'sequelize';
 import sequelize from '../config/database';
+import { Character as CharacterType, OriginLocation } from '../types';
 
-class Character extends Model {
+
+class Character extends Model<CharacterType> implements CharacterType {
   public id!: number;
   public name!: string;
   public status!: string;
   public species!: string;
   public type!: string;
   public gender!: string;
-  public origin!: string;
-  public location!: string;
+  public origin!: OriginLocation;
+  public location!: OriginLocation;
   public image!: string;
   public episode!: string[];
   public url!: string;

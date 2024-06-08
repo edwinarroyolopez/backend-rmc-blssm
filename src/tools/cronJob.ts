@@ -7,21 +7,24 @@ import { timingDecorator } from '../tools/timingDecorator';
 const  updateCharacters = timingDecorator(async () => {
   try {
     // Get all characters from the API
-    const charactersData = await getAllCharactersFromAPI();
+    const charactersData:any = await getAllCharactersFromAPI();
 
     // Iterate over each character and update the database if necessary
-    for (const characterData of charactersData) {
-      const existingCharacter:any = await Character.findByPk(characterData.id);
-      if (existingCharacter) {
-        // Compare and update if there are changes
-        const hasChanges = Object.keys(characterData).some(
-          key => existingCharacter[key] !== characterData[key]
-        );
-        if (hasChanges) {
-          await Character.upsert(characterData);
+     for (const characterData of charactersData) {
+        const existingCharacter: any = await Character.findByPk(characterData.id);
+        if (existingCharacter) {
+          // Compare and update if there are changes
+          const hasChanges = Object.keys(characterData).some(
+            (key) => existingCharacter[key] !== characterData[key]
+          );
+          if (hasChanges) {
+            await Character.upsert(characterData);
+          }
+        } else {
+          // If the character does not exist, insert it
+          await Character.create(characterData);
         }
       }
-    }
     console.log('Characters updated successfully');
   } catch (error) {
     console.error('Error updating characters:', error);
