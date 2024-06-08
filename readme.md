@@ -3,7 +3,7 @@
 ## Contents
 
 1. [Install](#install)
-2. [Env Setup](#envsetup)
+2. [Env Setup](#env-setup)
 3. [Migrations](#migrations)
 4. [Start](#start)
 5. [Test](#test)
