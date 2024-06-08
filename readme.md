@@ -3,10 +3,11 @@
 ## Contents
 
 1. [Install](#install)
-2. [Migrations](#migrations)
-3. [Start](#start)
-4. [Test](#test)
-5. [UseApi](#useapi)
+2. [Env Setup](#envsetup)
+3. [Migrations](#migrations)
+4. [Start](#start)
+5. [Test](#test)
+6. [UseApi](#useapi)
 
 
 ## Folder structure
