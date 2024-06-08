@@ -51,6 +51,12 @@ backend-rmc-blssm/
 **Node Version:** *v18.18.2* 
 To install run this command ```npm install```
 
+## Env Setup 
+1. Replace ```backend-rmc-blssm/src/config/config-example.json``` by ```backend-rmc-blssm/src/config/config.json``` and set your database configuration
+
+1. Replace ```backend-rmc-blssm/.env-example``` by ```backend-rmc-blssm/.env``` and set your database configuration
+
+
 ## Migrations
 
 To generate migrations run this command ```sequelize db:migrate```

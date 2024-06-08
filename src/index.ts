@@ -14,7 +14,7 @@ import typeDefs  from './graphql/types';
 import resolvers from './graphql/resolvers';
 
 import { loggingMiddleware } from './middleware/loggingMiddleware';
-import swaggerOptions from '../swaggerOptions';
+import swaggerOptions from './swaggerOptions';
 
 dotenv.config();
 
