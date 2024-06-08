@@ -10,20 +10,39 @@
 
 ## Folder structure
 ```
-src/
-│
-├── graphql/
-│   ├── resolvers/
-│   │   ├── charactersResolver.ts
-│   │   └── index.ts
-│   ├── types/
-│   │   ├── index.ts
-│   │   └── characters.ts
-│
-├── services/
-│   └── charactersService.ts
-├── packages.json
-└── readme.md
+backend-rmc-blssm/
+├── src/
+│   ├── config/
+│   │   ├── database.ts
+│   │   ├── redisClient.ts
+│   ├── graphql/
+│   │   ├── resolvers/
+│   │   │   ├── index.ts
+│   │   │   ├── characterResolver.ts
+│   │   ├── types/
+│   │   │   ├── index.ts
+│   │   │   ├── characterType.ts
+│   ├── models/
+│   │   ├── Character.ts
+│   ├── services/
+│   │   ├── charactersService.ts
+│   ├── middleware/
+│   │   ├── loggingMiddleware.ts
+│   ├── cron/
+│   │   ├── cronJob.ts
+│   ├── __tests__/
+│   │   ├── charactersService.test.ts
+│   ├── index.ts
+├── migrations/
+│   ├── 001-initial-characters.ts
+├── seeders/
+│   ├── 001-initial-characters.js
+├── .env
+├── .gitignore
+├── jest.config.js
+├── package.json
+├── tsconfig.json
+└── swaggerOptions.js
 ```
 
 
